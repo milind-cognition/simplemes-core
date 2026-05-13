@@ -20,10 +20,9 @@ import MultiLocales from "./MultiLocales"
 import {createApp} from 'vue'
 import ToastService from "primevue/toastservice";
 import PrimeVueConfig from "primevue/config";
+import Aura from 'primevue/themes/aura';
 import axios from "axios";
 
-import 'primevue/resources/themes/saga-blue/theme.css';
-import 'primevue/resources/primevue.min.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 
@@ -46,7 +45,11 @@ export default {
     });
 
     app.use(ToastService);
-    app.use(PrimeVueConfig);
+    app.use(PrimeVueConfig, {
+      theme: {
+        preset: Aura
+      }
+    });
     console.log('ABC_6')
 
     app.use(i18n)
