@@ -335,8 +335,9 @@ generatePomFileForMavenJavaPublication.finalizedBy fixPom
 
 */
 
-// Bintray upload setup
+// Bintray upload setup - disabled (Bintray/JCenter shut down)
 // See https://github.com/bintray/gradle-bintray-plugin#Plugin_DSL for syntax.
+/*
 bintray {
   user = bintrayUser
   key = System.getProperty('bintray_key')
@@ -360,6 +361,7 @@ bintray {
   }
 
 }
+*/
 
 // Tasks for the client module(s). Supports multiple modules from the gradle.properties (clientModules variable).
 clientModules.tokenize(',').each { moduleName ->
