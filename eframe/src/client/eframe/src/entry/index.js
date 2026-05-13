@@ -2,7 +2,7 @@ import {createApp} from 'vue'
 import App from '../components/eframe/home/App.vue';
 
 import PrimeVue from 'primevue/config';
-import Aura from 'primevue/themes/aura';
+import Aura from '@primevue/themes/aura';
 import InputText from 'primevue/inputtext';
 import Button from 'primevue/button';
 import Toast from 'primevue/toast';

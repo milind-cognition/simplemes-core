@@ -10,10 +10,11 @@ export default defineConfig({
   ],
   base: process.env.NODE_ENV === 'production' ? '/client/sample/' : '/',
   resolve: {
-    alias: {
-      '@': resolve(__dirname, 'src'),
-      'eframe-lib': resolve(__dirname, '../eframe/src/eframe-lib')
-    }
+    alias: [
+      { find: /^@\/eframe-lib\/(.*)/, replacement: resolve(__dirname, '../eframe/src/eframe-lib/$1') },
+      { find: '@', replacement: resolve(__dirname, 'src') }
+    ],
+    extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue']
   },
   build: {
     rollupOptions: {

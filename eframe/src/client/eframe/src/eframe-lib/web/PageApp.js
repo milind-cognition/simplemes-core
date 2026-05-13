@@ -20,7 +20,7 @@ import MultiLocales from "./MultiLocales"
 import {createApp} from 'vue'
 import ToastService from "primevue/toastservice";
 import PrimeVueConfig from "primevue/config";
-import Aura from 'primevue/themes/aura';
+import Aura from '@primevue/themes/aura';
 import axios from "axios";
 
 import 'primeicons/primeicons.css';
