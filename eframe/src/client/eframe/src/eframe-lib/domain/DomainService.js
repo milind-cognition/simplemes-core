@@ -35,7 +35,7 @@ export default {
     }
 
     const url = '/domain/displayFields?domain=' + domainClassName;
-    window.$page.vue.axios.get(url).then((response) => {
+    window.$page.axios.get(url).then((response) => {
       let theFields = response.data
       // Make sure all the top-level elements are present (empty)
       if (!theFields.tabs) {
