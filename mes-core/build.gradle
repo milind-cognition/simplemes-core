@@ -2,17 +2,16 @@ buildscript {
   repositories {
     mavenLocal()
     mavenCentral()
-    jcenter()
+    gradlePluginPortal()
   }
 }
 
 plugins {
   id "io.spring.dependency-management" version "1.0.6.RELEASE"
   id 'maven-publish'
-  id "com.jfrog.bintray" version "1.8.4"
   id "com.bertramlabs.asset-pipeline" version "3.0.10"
   id "org.owasp.dependencycheck" version "4.0.0.1"
-  id 'org.asciidoctor.jvm.convert' version '3.1.0'
+  id 'org.asciidoctor.jvm.convert' version '3.3.2'
   id "com.github.johnrengelman.shadow" version "6.1.0"
   id "io.micronaut.application" version '1.0.5'
 }
@@ -20,11 +19,8 @@ plugins {
 
 repositories {
   mavenLocal()
-  maven {
-    url  "https://dl.bintray.com/simplemes/simplemes-core"
-  }
   mavenCentral()
-  jcenter()
+  gradlePluginPortal()
 
 }
 
