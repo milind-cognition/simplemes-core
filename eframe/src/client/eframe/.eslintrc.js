@@ -1,18 +1,22 @@
-module.exports = {
+export default {
   root: true,
   env: {
-    node: true
+    node: true,
+    browser: true,
+    es2022: true
   },
-  'extends': [
+  extends: [
     'plugin:vue/vue3-essential',
     'eslint:recommended'
   ],
   parserOptions: {
-    parser: 'babel-eslint'
+    ecmaVersion: 'latest',
+    sourceType: 'module'
   },
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    "no-mixed-spaces-and-tabs": 0, // disable rule
+    'no-mixed-spaces-and-tabs': 0,
+    'no-unused-vars': 'warn'
   },
 }
