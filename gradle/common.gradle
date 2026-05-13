@@ -379,9 +379,9 @@ clientModules.tokenize(',').each { moduleName ->
   task "npmBuild${moduleName}"(type: Exec, group: 'build', description: "Builds the npm assets for the client module ${moduleName}") {
     workingDir("${project.file("src/client/${moduleName}")}")
     if (System.getProperty("os.name").toLowerCase().contains("windows"))
-      commandLine("cmd.exe", "/C", "npm.cmd run build -- --dest ../../main/resources/client/${moduleName}")
+      commandLine("cmd.exe", "/C", "npm.cmd run build -- --outDir ../../main/resources/client/${moduleName}")
     else // assume *nix.
-      commandLine("npm", "run", "build","--","--dest", "../../main/resources/client/${moduleName}") //
+      commandLine("npm", "run", "build","--","--outDir", "../../main/resources/client/${moduleName}")
   }
 }
 task npmBuild(dependsOn: clientModules.tokenize(',').collect{ moduleName -> "npmBuild${moduleName}" },

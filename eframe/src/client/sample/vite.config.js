@@ -10,8 +10,10 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
+      '@/eframe-lib': resolve(__dirname, '../eframe/src/eframe-lib'),
       '@': resolve(__dirname, 'src')
-    }
+    },
+    extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue']
   },
   base: process.env.NODE_ENV === 'production' ? '/client/sample/' : '/',
   server: {

@@ -5,7 +5,7 @@
 
 import axios from 'axios'
 
-module.exports = function (component, domainService) {
+export default function PageHolder(component, domainService) {
   const topComponent = component;
 
 
