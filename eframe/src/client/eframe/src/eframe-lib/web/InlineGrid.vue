@@ -64,7 +64,26 @@ import InputText from 'primevue/inputtext'
 import Dropdown from 'primevue/dropdown'
 import Checkbox from 'primevue/checkbox'
 
+let theRecords
 let lastRowClickTime = 0
+
+// Method to calculate the max value of the a column in the current inline grid.
+// eslint-disable-next-line no-unused-vars
+function _max(fieldName) {
+  let max = 0
+  if (!theRecords) {
+    return 0
+  }
+  for (let record of theRecords) {
+    if (record[fieldName]) {
+      if (record[fieldName] > max) {
+        max = record[fieldName]
+      }
+    }
+  }
+
+  return max
+}
 
 export default {
   name: 'InlineGrid',
@@ -95,8 +114,7 @@ export default {
       var row = {sequence: 10}
       for (let col of this.columns) {
         if (col.defaultValue) {
-          // eslint-disable-next-line no-unused-vars
-          let theRecords = this.$attrs.records
+          theRecords = this.$attrs.records
           let value = eval(col.defaultValue)
           if (value) {
             row[col.fieldName] = value
