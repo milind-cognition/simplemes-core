@@ -19,8 +19,7 @@ import MultiLocales from "./MultiLocales"
 
 import {createApp} from 'vue'
 import ToastService from "primevue/toastservice";
-import PrimeVueConfig from "primevue/config";
-import VueAxios from "vue-axios";
+import PrimeVue from "primevue/config";
 import axios from "axios";
 
 import 'primevue/resources/themes/saga-blue/theme.css';
@@ -41,16 +40,19 @@ export default {
       fallbackLocale: 'en',
       legacy: true,
       messages: MultiLocales.getLocales(),
-      silentTranslationWarn: true, silentFallbackWarn: true
+      silentTranslationWarn: true, silentFallbackWarn: true,
+      missingWarn: false,
+      fallbackWarn: false
     });
 
     app.use(ToastService);
-    app.use(PrimeVueConfig);
-    console.log('ABC_6')
+    app.use(PrimeVue);
 
-    app.component('router-link', i18n) // Use a dummy router-link component to avoid missing component warning.
+    app.component('router-link', {template: '<span><slot></slot></span>'})
     app.use(i18n)
-    app.use(VueAxios, axios)
+
+    app.config.globalProperties.axios = axios
+    app.config.globalProperties.$axios = axios
 
 
     // Define some
@@ -59,9 +61,6 @@ export default {
     // Add a request interceptor
     axios.interceptors.request.use(function (config) {
       numberOfAjaxCallsPending++;
-      //console.log("numberOfAjaxCAllPending1: "+numberOfAjaxCallsPending);
-
-      // show loader
       return config;
     }, function (error) {
       return Promise.reject(error);
@@ -70,8 +69,6 @@ export default {
     // Add a response interceptor
     axios.interceptors.response.use(function (response) {
       numberOfAjaxCallsPending--;
-      //console.log("------------  Ajax pending", numberOfAjaxCallsPending);
-
       if (numberOfAjaxCallsPending == 0) {
         //hide loader
       }
@@ -95,4 +92,3 @@ export default {
     return app
   }
 }
-

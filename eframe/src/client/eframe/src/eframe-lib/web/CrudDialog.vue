@@ -8,13 +8,13 @@ A standard dialog for performing CRUD-style maintenance on single domain records
   <Dialog v-model:visible="dialogVisible" :breakpoints="{'960px': '95vw', '640px': '100vw'}" :style="{width: '90vw'}"
           :header="mode=='add' ? $t('title.add') : $t('title.edit')" :modal="true" :maximizable="true"
           :autoZIndex="true" :baseZIndex="90">
-    <div class="p-fluid p-formgrid p-grid p-ai-center">
+    <div class="fluid formgrid grid align-items-center">
       <StandardField v-for="field in fields.top" :key="field.fieldName" :field="field" :record="record" ref="keyField"/>
-      <div class="p-col-12"></div>
+      <div class="col-12"></div>
       <StandardField v-for="field in fields.bottom" :key="field.fieldName" :field="field" :record="record"/>
-      <TabView v-if="fields.tabs.length>0" class="p-col-12">
+      <TabView v-if="fields.tabs.length>0" class="col-12">
         <TabPanel v-for="tab in fields.tabs" :header="$t(tab.tabLabel)" :key="tab.tab">
-          <div class="p-fluid p-formgrid p-grid p-ai-center">
+          <div class="fluid formgrid grid align-items-center">
             <StandardField v-for="field in tab.fields" :key="field.fieldName" :field="field" :record="record"/>
           </div>
         </TabPanel>
@@ -83,7 +83,6 @@ export default {
 
     },
     saveDialog() {
-      //console.log("saving: " + JSON.stringify(this.$data.record) + " with "+this.service);
       this.service.save(this.$data.record, this.$data.fields, () => {
         this.dialogVisible = false
         this.$emit('updatedRecord', {record: this.$data.record})
@@ -110,7 +109,6 @@ export default {
     // Load the fields needed for the dialog.
     DomainService.getDisplayFields(this.domainClassName, (data) => {
       this.fields = data
-      //console.log("DomainService data: "+JSON.stringify(data));
     });
   },
 }
@@ -133,4 +131,3 @@ function fixMissingChildLists(theRecord, fieldDefs) {
 
 
 </script>
-

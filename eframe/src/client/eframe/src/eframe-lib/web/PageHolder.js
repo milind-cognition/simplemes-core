@@ -3,6 +3,8 @@
  */
 'use strict';
 
+import axios from 'axios'
+
 module.exports = function (component, domainService) {
   const topComponent = component;
 
@@ -11,6 +13,11 @@ module.exports = function (component, domainService) {
    * The top vue component.
    */
   this.vue = topComponent
+
+  /**
+   * Axios instance for HTTP requests.
+   */
+  this.axios = axios
 
   /**
    * Domain Service being used.
@@ -37,4 +44,3 @@ module.exports = function (component, domainService) {
   }
 
 }
-

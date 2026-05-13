@@ -6,6 +6,7 @@
  * JS Service for access to domain object details (DomainController).
  */
 import InMemoriam from 'in-memoriam'
+import axios from 'axios'
 
 const cache = new InMemoriam(10, 600000)
 
@@ -30,12 +31,11 @@ export default {
   getDisplayFields(domainClassName, successFunction, errorFunction) {
     if (cache.get(domainClassName)) {
       successFunction(cache.get(domainClassName))
-      //console.log("cache: " + JSON.stringify(cache.stats));
       return
     }
 
     const url = '/domain/displayFields?domain=' + domainClassName;
-    window.$page.vue.axios.get(url).then((response) => {
+    axios.get(url).then((response) => {
       let theFields = response.data
       // Make sure all the top-level elements are present (empty)
       if (!theFields.tabs) {
@@ -80,7 +80,6 @@ export default {
   _emptyDomain(fields) {
     let record = {}
 
-    //console.log("theComponent.fields: "+JSON.stringify(theComponent.$data.fields));
     let allFields = this._flattenFieldList(fields)
 
     // Force an empty array for the child record list for the inline grid support.

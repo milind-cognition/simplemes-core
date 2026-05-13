@@ -11,10 +11,10 @@
              editMode="row" v-model:editingRows="editingRows"
              @rowEditInit="onRowEditInit" @rowEditCancel="onRowEditCancel" @rowClick="onRowClick">
     <template #header>
-      <div class="p-d-flex p-jc-between">
-        <Button type="button" icon="pi pi-plus  p-input-icon-right" class="p-button-outlined" @click="addRow"
+      <div class="flex justify-content-between">
+        <Button type="button" icon="pi pi-plus" class="p-button-outlined" @click="addRow"
                 :title="$t('tooltip.addRow')"/>
-        <Button type="button" icon="pi pi-minus p-input-icon-right" class="p-button-outlined" @click="removeRow"
+        <Button type="button" icon="pi pi-minus" class="p-button-outlined" @click="removeRow"
                 :title="$t('tooltip.removeRow')"/>
       </div>
     </template>
@@ -64,6 +64,8 @@ import InputText from 'primevue/inputtext'
 import Dropdown from 'primevue/dropdown'
 import Checkbox from 'primevue/checkbox'
 
+let lastRowClickTime = 0
+
 export default {
   name: 'InlineGrid',
   components: {
@@ -83,7 +85,7 @@ export default {
       type: String,
       required: true
     },
-  }, // ['columns', 'service', 'storageKey'],
+  },
   originalEditRecord: null,
   created() {
     this.originalEditRecord = {}
@@ -93,7 +95,8 @@ export default {
       var row = {sequence: 10}
       for (let col of this.columns) {
         if (col.defaultValue) {
-          theRecords = this.$attrs.records
+          // eslint-disable-next-line no-unused-vars
+          let theRecords = this.$attrs.records
           let value = eval(col.defaultValue)
           if (value) {
             row[col.fieldName] = value
@@ -110,11 +113,10 @@ export default {
       // Returns the global $page element for access to common services
       return window.$page
     },
-    getDisplayValue(column, fieldValue) {      // TODO: Move dropdown/grid logic to its own component?
+    getDisplayValue(column, fieldValue) {
       return fieldValue
     },
     getDropDownLabel(column, fieldValue) {
-      //console.log("fieldName: "+fieldName+" fieldValue: "+fieldValue);
       const validValues = column.validValues
       if (validValues) {
         for (let row of validValues) {
@@ -145,53 +147,13 @@ export default {
     onRowEditCancel(event) {
       this.$attrs.records[event.index] = this.originalEditRecord[event.index];
     },
-    onCellEditInit() {
-      //const fieldName = event.field
-      setTimeout(function () {
-        const elementNames = ['cellEditorField', 'cellEditorFieldDropDown']
-        for (let elementName of elementNames) {
-          const element = document.getElementById(elementName)
-          if (element) {
-            element.focus()
-            //element.select()
-            return
-          }
-        }
-
-      }, 50)
-
-    },
     removeRow() {
-      if (this.selectedRowIndex != undefined) {
+      if (this.selectedRowIndex != null) {
         this.$attrs.records.splice(this.selectedRowIndex, 1)
+        this.selectedRowIndex = null
       }
     },
   },
-  mounted() {
-
-  },
-}
-
-let theRecords
-let lastRowClickTime = 0
-
-// Method to calculate the max value of the a column in the current inline grid.
-// eslint-disable-next-line no-unused-vars
-function _max(fieldName) {
-  let max = 0
-  if (!theRecords) {
-    return 0
-  }
-  for (let record of theRecords) {
-    if (record[fieldName]) {
-      if (record[fieldName] > max) {
-        max = record[fieldName]
-      }
-    }
-  }
-
-  return max
 
 }
 </script>
-
