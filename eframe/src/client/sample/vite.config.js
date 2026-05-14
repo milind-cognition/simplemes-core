@@ -3,8 +3,24 @@ import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
 import viteCompression from 'vite-plugin-compression'
 
+function htmlRewritePlugin(pageRoutes) {
+  return {
+    name: 'html-rewrite',
+    configureServer(server) {
+      server.middlewares.use((req, res, next) => {
+        const path = req.url?.split('?')[0]
+        if (pageRoutes.includes(path)) {
+          req.url = path + '.html' + (req.url.includes('?') ? '?' + req.url.split('?')[1] : '')
+        }
+        next()
+      })
+    }
+  }
+}
+
 export default defineConfig({
   plugins: [
+    htmlRewritePlugin(['/sampleParent', '/allFieldsDomain']),
     vue(),
     viteCompression({ threshold: 500 })
   ],
@@ -28,8 +44,8 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': 'http://localhost:8080',
-      '/sampleParent': 'http://localhost:8080',
-      '/allFieldsDomain': 'http://localhost:8080',
+      '/sampleParent/': 'http://localhost:8080',
+      '/allFieldsDomain/': 'http://localhost:8080',
       '/domain': 'http://localhost:8080'
     }
   }
