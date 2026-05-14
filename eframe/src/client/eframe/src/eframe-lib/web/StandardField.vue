@@ -1,5 +1,5 @@
 StandardField run-time display component.  Supports multiple fieldFormat values.
-Should be used inside the div: 'div class="p-fluid p-formgrid p-grid"'
+Should be used inside the div: 'div class="fluid formgrid grid"'
 
 
 <!--
@@ -7,37 +7,37 @@ Should be used inside the div: 'div class="p-fluid p-formgrid p-grid"'
   -->
 
 <template>
-  <div class="p-col-12">
-    <div class="p-field p-grid" v-if="field.fieldFormat===$page().domainService.fieldFormats.STRING">
-      <label :for="field.fieldName" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0"><span
+  <div class="col-12">
+    <div class="field grid" v-if="field.fieldFormat===$page().domainService.fieldFormats.STRING">
+      <label :for="field.fieldName" class="col-12 mb-2 md:col-2 mb-md-0"><span
           v-if="field.required">*</span>{{ $t(field.fieldLabel) }}</label>
-      <div class="p-col-12 " :class="textFieldClass(field)">
+      <div class="col-12 " :class="textFieldClass(field)">
         <InputText v-bind:id="field.fieldName" :maxlength="field.maxLength" v-model="value"/>
       </div>
     </div>
-    <div class="p-field" v-else-if="field.fieldFormat===$page().domainService.fieldFormats.CHILD_LIST">
+    <div class="field" v-else-if="field.fieldFormat===$page().domainService.fieldFormats.CHILD_LIST">
       <label :for="field.fieldName"><span v-if="field.required">*</span>{{ $t(field.fieldLabel) }}</label>
       <InlineGrid :storageKey="field.fieldName" :columns="field.fields" :records="this.$attrs.record[field.fieldName]"/>
     </div>
-    <div class="p-field p-grid" v-else-if="field.fieldFormat===$page().domainService.fieldFormats.BOOLEAN">
-      <label :for="field.fieldName" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{ $t(field.fieldLabel) }}</label>
-      <div class="p-col-12 p-md-2">
+    <div class="field grid" v-else-if="field.fieldFormat===$page().domainService.fieldFormats.BOOLEAN">
+      <label :for="field.fieldName" class="col-12 mb-2 md:col-2 mb-md-0">{{ $t(field.fieldLabel) }}</label>
+      <div class="col-12 md:col-2">
         <Checkbox :id="field.fieldName" v-model="value" :binary="true"/>
       </div>
     </div>
-    <div class="p-field p-grid" v-else-if="field.fieldFormat===$page().domainService.fieldFormats.ENUM">
-      <label :for="field.fieldName" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0"><span
+    <div class="field grid" v-else-if="field.fieldFormat===$page().domainService.fieldFormats.ENUM">
+      <label :for="field.fieldName" class="col-12 mb-2 md:col-2 mb-md-0"><span
           v-if="field.required">*</span>{{ $t(field.fieldLabel) }}</label>
-      <div class="p-col-12 p-md-2">
-        <Dropdown v-bind:id="field.fieldName" v-model="value" :options="field.validValues" optionLabel="label"
+      <div class="col-12 md:col-2">
+        <Select v-bind:id="field.fieldName" v-model="value" :options="field.validValues" optionLabel="label"
                   optionValue="value">
-        </Dropdown>
+        </Select>
       </div>
     </div>
-    <div class="p-field p-grid" v-else-if="field.fieldFormat===$page().domainService.fieldFormats.INT">
-      <label :for="field.fieldName" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0"><span
+    <div class="field grid" v-else-if="field.fieldFormat===$page().domainService.fieldFormats.INT">
+      <label :for="field.fieldName" class="col-12 mb-2 md:col-2 mb-md-0"><span
           v-if="field.required">*</span>{{ $t(field.fieldLabel) }}</label>
-      <div class="p-col-12 p-md-2">
+      <div class="col-12 md:col-2">
         <InputNumber :id="field.fieldName" v-model="value" locale="en-US" mode="decimal" style="width:14em"
                      :minFractionDigits="0" :maxFractionDigits="0"
                      showButtons
@@ -47,27 +47,27 @@ Should be used inside the div: 'div class="p-fluid p-formgrid p-grid"'
         />
       </div>
     </div>
-    <div class="p-field p-grid" v-else-if="field.fieldFormat===$page().domainService.fieldFormats.DATE_TIME">
-      <label :for="field.fieldName" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0"><span
+    <div class="field grid" v-else-if="field.fieldFormat===$page().domainService.fieldFormats.DATE_TIME">
+      <label :for="field.fieldName" class="col-12 mb-2 md:col-2 mb-md-0"><span
           v-if="field.required">*</span>{{ $t(field.fieldLabel) }}</label>
-      <div class="p-col-12 p-md-2">
-        <Calendar :id="field.fieldName" v-model="value" :showIcon="true" hourFormat="12" style="width:14em"
+      <div class="col-12 md:col-2">
+        <DatePicker :id="field.fieldName" v-model="value" :showIcon="true" hourFormat="12" style="width:14em"
                   :showTime="true" :showOnFocus="false" :hideOnDateTimeSelect="true"
         />
       </div>
     </div>
-    <div class="p-field p-grid" v-else-if="field.fieldFormat===$page().domainService.fieldFormats.DATE">
-      <label :for="field.fieldName" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0"><span
+    <div class="field grid" v-else-if="field.fieldFormat===$page().domainService.fieldFormats.DATE">
+      <label :for="field.fieldName" class="col-12 mb-2 md:col-2 mb-md-0"><span
           v-if="field.required">*</span>{{ $t(field.fieldLabel) }}</label>
-      <div class="p-col-12 p-md-2">
-        <Calendar :id="field.fieldName" v-model="value" :showIcon="true"
+      <div class="col-12 md:col-2">
+        <DatePicker :id="field.fieldName" v-model="value" :showIcon="true"
                   :showTime="false" :showOnFocus="false"
         />
       </div>
     </div>
-    <div class="p-field p-grid" v-else>
-      <label :for="field.fieldName" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">{{ $t(field.fieldLabel) }}</label>
-      <div class="p-col-12 p-md-2">
+    <div class="field grid" v-else>
+      <label :for="field.fieldName" class="col-12 mb-2 md:col-2 mb-md-0">{{ $t(field.fieldLabel) }}</label>
+      <div class="col-12 md:col-2">
         <InputText v-bind:id="field.fieldName" :maxlength="field.maxLength" v-model="value"/>
       </div>
     </div>
@@ -79,8 +79,8 @@ Should be used inside the div: 'div class="p-fluid p-formgrid p-grid"'
 import InputText from 'primevue/inputtext';
 import InputNumber from 'primevue/inputnumber';
 import Checkbox from 'primevue/checkbox';
-import Dropdown from 'primevue/dropdown';
-import Calendar from 'primevue/calendar';
+import Select from 'primevue/select';
+import DatePicker from 'primevue/datepicker';
 
 import InlineGrid from './InlineGrid';
 
@@ -112,7 +112,7 @@ export default {
   },
   props: ['field'],
   components: {
-    InputText, InputNumber, Checkbox, InlineGrid, Dropdown, Calendar
+    InputText, InputNumber, Checkbox, InlineGrid, Select, DatePicker
   },
   computed: {
     value: {
@@ -129,14 +129,13 @@ export default {
     }
   },
   methods: {
-    // Determines the class(es) needed for the given field.
     textFieldClass(theField) {
       if (theField.maxLength < 30) {
-        return "p-md-4"
+        return "md:col-4"
       } else if (theField.maxLength < 80) {
-        return "p-md-6"
+        return "md:col-6"
       } else {
-        return "p-md-8"
+        return "md:col-8"
       }
     },
     $page() {
@@ -152,4 +151,3 @@ export default {
 
 }
 </script>
-
