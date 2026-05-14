@@ -5,31 +5,30 @@
 <template>
   <StandardHeader/>
   <div class="app-container">
-    <div class="p-grid">
-      <div class="p-col">
+    <div class="grid">
+      <div class="col">
         <div class="box">
-          <div class="p-row p-m-2">
+          <div class="grid m-2">
             <DataTable :value="records" :lazy="true" :paginator="true" :rows="pageSize" ref="crudTable"
                        :totalRecords="totalRecords" :loading="loading" @page="onPage($event)" @sort="onSort($event)"
                        data-testid="CrudTable"
                        stateStorage="local" :stateKey="computedStateKey" :rowHover="false">
               <template #header>
-                <div class="p-d-flex p-jc-between">
+                <div class="flex justify-content-between">
                   <Button type="button" icon="pi pi-plus" class="p-button-outlined" @click="addRecord"
                           :label="$t('label.add')" :title="$t('tooltip.addCrud')" id="addRecord"/>
-                  <span class="p-input-icon-left p-input-icon-right">
-                    <i class="pi pi-search"/>
+                  <IconField iconPosition="left">
+                    <InputIcon class="pi pi-search"/>
                     <InputText v-model="requestParams.filter" :placeholder="$t('label.search')" @change="searchChanged"
                                ref="filter"/>
-                    <i class="pi pi-times" @click="clearFilter"/>
-                </span>
+                  </IconField>
                 </div>
               </template>
               <Column v-for="col of columns" :field="col.field" :header="col.header" :key="col.field"
                       :sortable="col.sort"></Column>
               <Column :exportable="false">
                 <template #body="slotProps">
-                  <Button icon="pi pi-pencil" class="p-button-rounded p-button-outlined p-mr-2" id="EditRow"
+                  <Button icon="pi pi-pencil" class="p-button-rounded p-button-outlined mr-2" id="EditRow"
                           @click="editRecord(slotProps.data)"/>
                   <Button icon="pi pi-ellipsis-h" class="p-button-rounded p-button-outlined p-button-success "
                           @click="optionsMenu(slotProps.data,$event)" aria-haspopup="true" id="RowMenuButton"
@@ -46,7 +45,7 @@
   <CrudDialog :domainClassName="domainClassName" :service="service" ref="crudDialog" @updatedRecord="onUpdatedRecord"/>
   <Dialog v-model:visible="confirmDeleteDialogVisible" :style="{width: '450px'}" header="Confirm" :modal="true">
     <div class="confirmation-content">
-      <i class="pi pi-exclamation-triangle p-mr-3" style="font-size: 2rem"/>
+      <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"/>
       <span>{{ $t('message.deleteConfirm', {record: this.service.buildLabel(this.rowMenuRecord, true)}) }}</span>
     </div>
     <template #footer>
@@ -65,6 +64,8 @@ import InputText from 'primevue/inputtext'
 import Button from 'primevue/button'
 import Menu from 'primevue/menu'
 import Dialog from 'primevue/dialog'
+import IconField from 'primevue/iconfield'
+import InputIcon from 'primevue/inputicon'
 
 import PageHolder from './PageHolder'
 import StandardHeader from './StandardHeader'
@@ -75,7 +76,7 @@ import DomainService from "../domain/DomainService"
 export default {
   name: 'CrudTable',
   components: {
-    StandardHeader, DataTable, Column, InputText, Button, CrudDialog, Menu, Dialog
+    StandardHeader, DataTable, Column, InputText, Button, CrudDialog, Menu, Dialog, IconField, InputIcon
   },
   props: {
     columns: Array,

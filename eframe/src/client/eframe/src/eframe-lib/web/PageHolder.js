@@ -3,7 +3,9 @@
  */
 'use strict';
 
-module.exports = function (component, domainService) {
+import axios from 'axios'
+
+export default function PageHolder(component, domainService) {
   const topComponent = component;
 
 
@@ -11,6 +13,11 @@ module.exports = function (component, domainService) {
    * The top vue component.
    */
   this.vue = topComponent
+
+  /**
+   * The axios instance for HTTP requests.
+   */
+  this.axios = axios
 
   /**
    * Domain Service being used.
