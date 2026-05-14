@@ -44,6 +44,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': 'http://localhost:8080',
+      '/login': 'http://localhost:8080',
       '/sampleParent/': 'http://localhost:8080',
       '/allFieldsDomain/': 'http://localhost:8080',
       '/domain': 'http://localhost:8080'

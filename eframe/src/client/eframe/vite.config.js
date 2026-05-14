@@ -42,6 +42,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': 'http://localhost:8080',
+      '/login': 'http://localhost:8080',
       '/flexType/': 'http://localhost:8080',
       '/domain': 'http://localhost:8080'
     }
