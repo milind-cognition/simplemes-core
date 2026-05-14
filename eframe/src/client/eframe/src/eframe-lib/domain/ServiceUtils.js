@@ -37,7 +37,7 @@ export default class ServiceUtils {
   static list(uri, options, successFunction, errorFunction) {
     const url = uri + '/list';
 
-    return window.$page.vue.axios.get(url, {params: options}).then((response) => {
+    return window.$page.axios.get(url, {params: options}).then((response) => {
       if (successFunction) {
         successFunction(response.data)
       }
@@ -65,7 +65,7 @@ export default class ServiceUtils {
       return
     }
     const url = uri + '/crud/' + uuid;
-    return window.$page.vue.axios.get(url).then((response) => {
+    return window.$page.axios.get(url).then((response) => {
       successFunction(response.data)
       cache.set(uuid, response.data)
     }).catch((error) => {
@@ -93,10 +93,10 @@ export default class ServiceUtils {
     var clonedObject = JSON.parse(JSON.stringify(object))
     this.fixFieldTypesForSave(clonedObject, fields)
 
-    let saveFunction = window.$page.vue.axios.post
+    let saveFunction = window.$page.axios.post
     if (clonedObject.uuid) {
       url = uri + '/crud/' + clonedObject.uuid
-      saveFunction = window.$page.vue.axios.put
+      saveFunction = window.$page.axios.put
     }
 
     return saveFunction(url, clonedObject).then((response) => {
@@ -123,7 +123,7 @@ export default class ServiceUtils {
   static delete(uri, object, successFunction, errorFunction) {
     const url = uri + '/crud/' + object.uuid;
 
-    return window.$page.vue.axios.delete(url, object).then((response) => {
+    return window.$page.axios.delete(url, object).then((response) => {
       if (successFunction) {
         successFunction(response.data)
       }
