@@ -20,11 +20,9 @@ import MultiLocales from "./MultiLocales"
 import {createApp} from 'vue'
 import ToastService from "primevue/toastservice";
 import PrimeVueConfig from "primevue/config";
-import VueAxios from "vue-axios";
+import Aura from '@primevue/themes/aura';
 import axios from "axios";
 
-import 'primevue/resources/themes/saga-blue/theme.css';
-import 'primevue/resources/primevue.min.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 
@@ -39,18 +37,16 @@ export default {
     const i18n = createI18n({
       locale: navigator.language,
       fallbackLocale: 'en',
-      legacy: true,
+      globalInjection: true,
       messages: MultiLocales.getLocales(),
       silentTranslationWarn: true, silentFallbackWarn: true
     });
 
     app.use(ToastService);
-    app.use(PrimeVueConfig);
-    console.log('ABC_6')
+    app.use(PrimeVueConfig, { theme: { preset: Aura } });
 
     app.component('router-link', i18n) // Use a dummy router-link component to avoid missing component warning.
     app.use(i18n)
-    app.use(VueAxios, axios)
 
 
     // Define some

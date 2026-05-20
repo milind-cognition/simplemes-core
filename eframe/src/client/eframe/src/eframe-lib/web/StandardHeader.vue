@@ -5,13 +5,13 @@
 <template>
   <Toast :autoZIndex="false" :baseZIndex="1000" class="toast-class"/>
   <Toolbar>
-    <template #left>
-      <Button icon="pi pi-bars" class="p-mr-2"/>
+    <template #start>
+      <Button icon="pi pi-bars" class="mr-2"/>
     </template>
 
-    <template #right>
-      <Button icon="pi pi-cog" class="p-mr-2"/>
-      <Button icon="pi pi-power-off" class="p-mr-2"/>
+    <template #end>
+      <Button icon="pi pi-cog" class="mr-2"/>
+      <Button icon="pi pi-power-off" class="mr-2"/>
       <Button icon="pi pi-home" class="p-button-success" @click="handleHomeClick($event)"/>
     </template>
   </Toolbar>

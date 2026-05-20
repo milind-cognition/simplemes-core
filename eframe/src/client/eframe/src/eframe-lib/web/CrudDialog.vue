@@ -8,17 +8,22 @@ A standard dialog for performing CRUD-style maintenance on single domain records
   <Dialog v-model:visible="dialogVisible" :breakpoints="{'960px': '95vw', '640px': '100vw'}" :style="{width: '90vw'}"
           :header="mode=='add' ? $t('title.add') : $t('title.edit')" :modal="true" :maximizable="true"
           :autoZIndex="true" :baseZIndex="90">
-    <div class="p-fluid p-formgrid p-grid p-ai-center">
+    <div class="fluid formgrid grid align-items-center">
       <StandardField v-for="field in fields.top" :key="field.fieldName" :field="field" :record="record" ref="keyField"/>
-      <div class="p-col-12"></div>
+      <div class="col-12"></div>
       <StandardField v-for="field in fields.bottom" :key="field.fieldName" :field="field" :record="record"/>
-      <TabView v-if="fields.tabs.length>0" class="p-col-12">
-        <TabPanel v-for="tab in fields.tabs" :header="$t(tab.tabLabel)" :key="tab.tab">
-          <div class="p-fluid p-formgrid p-grid p-ai-center">
-            <StandardField v-for="field in tab.fields" :key="field.fieldName" :field="field" :record="record"/>
-          </div>
-        </TabPanel>
-      </TabView>
+      <Tabs v-if="fields.tabs.length>0" class="col-12">
+        <TabList>
+          <Tab v-for="tab in fields.tabs" :value="tab.tab" :key="tab.tab">{{ $t(tab.tabLabel) }}</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel v-for="tab in fields.tabs" :value="tab.tab" :key="tab.tab">
+            <div class="fluid formgrid grid align-items-center">
+              <StandardField v-for="field in tab.fields" :key="field.fieldName" :field="field" :record="record"/>
+            </div>
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
     </div>
 
     <template #footer>
@@ -33,7 +38,10 @@ A standard dialog for performing CRUD-style maintenance on single domain records
 
 import Button from 'primevue/button'
 import Dialog from 'primevue/dialog'
-import TabView from 'primevue/tabview'
+import Tabs from 'primevue/tabs'
+import TabList from 'primevue/tablist'
+import Tab from 'primevue/tab'
+import TabPanels from 'primevue/tabpanels'
 import TabPanel from 'primevue/tabpanel'
 
 import DomainService from "../domain/DomainService"
@@ -44,7 +52,7 @@ import StandardField from "./StandardField"
 export default {
   name: 'CrudDialog',
   components: {
-    StandardField, Button, Dialog, TabView, TabPanel,
+    StandardField, Button, Dialog, Tabs, TabList, Tab, TabPanels, TabPanel,
   },
   props: {
     domainClassName: {

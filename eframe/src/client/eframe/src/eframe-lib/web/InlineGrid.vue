@@ -11,10 +11,10 @@
              editMode="row" v-model:editingRows="editingRows"
              @rowEditInit="onRowEditInit" @rowEditCancel="onRowEditCancel" @rowClick="onRowClick">
     <template #header>
-      <div class="p-d-flex p-jc-between">
-        <Button type="button" icon="pi pi-plus  p-input-icon-right" class="p-button-outlined" @click="addRow"
+      <div class="flex justify-content-between">
+        <Button type="button" icon="pi pi-plus" class="p-button-outlined" @click="addRow"
                 :title="$t('tooltip.addRow')"/>
-        <Button type="button" icon="pi pi-minus p-input-icon-right" class="p-button-outlined" @click="removeRow"
+        <Button type="button" icon="pi pi-minus" class="p-button-outlined" @click="removeRow"
                 :title="$t('tooltip.removeRow')"/>
       </div>
     </template>
@@ -22,12 +22,12 @@
             :sortable="col.sort">
       <template #editor="slotProps">
         <div v-if="col.fieldFormat===$page().domainService.fieldFormats.ENUM">
-          <Dropdown v-model="slotProps.data[col.fieldName]" :options="col.validValues" optionLabel="label"
+          <Select v-model="slotProps.data[col.fieldName]" :options="col.validValues" optionLabel="label"
                     optionValue="value">
             <template #option="slotProps">
               <span>{{ slotProps.option.label }}</span>
             </template>
-          </Dropdown>
+          </Select>
         </div>
         <div v-else-if="col.fieldFormat===$page().domainService.fieldFormats.BOOLEAN">
           <Checkbox v-model="slotProps.data[col.fieldName]" :value="slotProps.data[slotProps.column.props.field]"
@@ -61,13 +61,13 @@ import DataTable from 'primevue/datatable'
 import Column from 'primevue/column'
 import Button from 'primevue/button'
 import InputText from 'primevue/inputtext'
-import Dropdown from 'primevue/dropdown'
+import Select from 'primevue/select'
 import Checkbox from 'primevue/checkbox'
 
 export default {
   name: 'InlineGrid',
   components: {
-    DataTable, Column, Button, InputText, Dropdown, Checkbox
+    DataTable, Column, Button, InputText, Select, Checkbox
   },
   data() {
     return {

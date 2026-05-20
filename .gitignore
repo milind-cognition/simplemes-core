@@ -21,3 +21,6 @@ staging/
 {imagesdir-build}/
 {imagesdir-src}/
 node_modules/
+
+# Vite build output
+eframe/src/client/*/dist/
