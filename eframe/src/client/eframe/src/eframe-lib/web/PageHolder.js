@@ -3,7 +3,7 @@
  */
 'use strict';
 
-module.exports = function (component, domainService) {
+export default function (component, domainService) {
   const topComponent = component;
 
 
