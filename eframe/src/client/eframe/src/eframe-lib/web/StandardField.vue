@@ -9,7 +9,7 @@ Should be used inside the div: 'div class="fluid formgrid grid"'
 <template>
   <div class="col-12">
     <div class="field grid" v-if="field.fieldFormat===$page().domainService.fieldFormats.STRING">
-      <label :for="field.fieldName" class="col-12 mb-2 md:col-2 mb-md-0"><span
+      <label :for="field.fieldName" class="col-12 mb-2 md:col-2 md:mb-0"><span
           v-if="field.required">*</span>{{ $t(field.fieldLabel) }}</label>
       <div class="col-12 " :class="textFieldClass(field)">
         <InputText v-bind:id="field.fieldName" :maxlength="field.maxLength" v-model="value"/>
@@ -20,13 +20,13 @@ Should be used inside the div: 'div class="fluid formgrid grid"'
       <InlineGrid :storageKey="field.fieldName" :columns="field.fields" :records="this.$attrs.record[field.fieldName]"/>
     </div>
     <div class="field grid" v-else-if="field.fieldFormat===$page().domainService.fieldFormats.BOOLEAN">
-      <label :for="field.fieldName" class="col-12 mb-2 md:col-2 mb-md-0">{{ $t(field.fieldLabel) }}</label>
+      <label :for="field.fieldName" class="col-12 mb-2 md:col-2 md:mb-0">{{ $t(field.fieldLabel) }}</label>
       <div class="col-12 md:col-2">
         <Checkbox :id="field.fieldName" v-model="value" :binary="true"/>
       </div>
     </div>
     <div class="field grid" v-else-if="field.fieldFormat===$page().domainService.fieldFormats.ENUM">
-      <label :for="field.fieldName" class="col-12 mb-2 md:col-2 mb-md-0"><span
+      <label :for="field.fieldName" class="col-12 mb-2 md:col-2 md:mb-0"><span
           v-if="field.required">*</span>{{ $t(field.fieldLabel) }}</label>
       <div class="col-12 md:col-2">
         <Select v-bind:id="field.fieldName" v-model="value" :options="field.validValues" optionLabel="label"
@@ -35,7 +35,7 @@ Should be used inside the div: 'div class="fluid formgrid grid"'
       </div>
     </div>
     <div class="field grid" v-else-if="field.fieldFormat===$page().domainService.fieldFormats.INT">
-      <label :for="field.fieldName" class="col-12 mb-2 md:col-2 mb-md-0"><span
+      <label :for="field.fieldName" class="col-12 mb-2 md:col-2 md:mb-0"><span
           v-if="field.required">*</span>{{ $t(field.fieldLabel) }}</label>
       <div class="col-12 md:col-2">
         <InputNumber :id="field.fieldName" v-model="value" locale="en-US" mode="decimal" style="width:14em"
@@ -48,7 +48,7 @@ Should be used inside the div: 'div class="fluid formgrid grid"'
       </div>
     </div>
     <div class="field grid" v-else-if="field.fieldFormat===$page().domainService.fieldFormats.DATE_TIME">
-      <label :for="field.fieldName" class="col-12 mb-2 md:col-2 mb-md-0"><span
+      <label :for="field.fieldName" class="col-12 mb-2 md:col-2 md:mb-0"><span
           v-if="field.required">*</span>{{ $t(field.fieldLabel) }}</label>
       <div class="col-12 md:col-2">
         <DatePicker :id="field.fieldName" v-model="value" :showIcon="true" hourFormat="12" style="width:14em"
@@ -57,7 +57,7 @@ Should be used inside the div: 'div class="fluid formgrid grid"'
       </div>
     </div>
     <div class="field grid" v-else-if="field.fieldFormat===$page().domainService.fieldFormats.DATE">
-      <label :for="field.fieldName" class="col-12 mb-2 md:col-2 mb-md-0"><span
+      <label :for="field.fieldName" class="col-12 mb-2 md:col-2 md:mb-0"><span
           v-if="field.required">*</span>{{ $t(field.fieldLabel) }}</label>
       <div class="col-12 md:col-2">
         <DatePicker :id="field.fieldName" v-model="value" :showIcon="true"
@@ -66,7 +66,7 @@ Should be used inside the div: 'div class="fluid formgrid grid"'
       </div>
     </div>
     <div class="field grid" v-else>
-      <label :for="field.fieldName" class="col-12 mb-2 md:col-2 mb-md-0">{{ $t(field.fieldLabel) }}</label>
+      <label :for="field.fieldName" class="col-12 mb-2 md:col-2 md:mb-0">{{ $t(field.fieldLabel) }}</label>
       <div class="col-12 md:col-2">
         <InputText v-bind:id="field.fieldName" :maxlength="field.maxLength" v-model="value"/>
       </div>
