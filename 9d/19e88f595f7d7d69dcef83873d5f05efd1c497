@@ -1,0 +1,29 @@
+mes-core/src/test/groovy/org/simplemes/mes/demand/CompleteResponseSpec.groovy
+  s_61a70423f190d2::t_7f259e00fe8bd7 1-93
+mes-core/src/test/groovy/org/simplemes/mes/tracking/ProductionLogRequestSpec.groovy
+  s_61a70423f190d2::t_32cfeaef321b46 1-99
+mes-core/src/test/groovy/org/simplemes/mes/demand/OrderReleaseRequestSpec.groovy
+  s_61a70423f190d2::t_0a536e18578d2d 1-109
+mes-core/src/test/groovy/org/simplemes/mes/tracking/ProductionLogArchiveRequestSpec.groovy
+  s_61a70423f190d2::t_3b7f100ab92674 1-100
+mes-core/src/test/groovy/org/simplemes/mes/floor/WorkCenterEnabledStatusSpec.groovy
+  s_61a70423f190d2::t_5a09460300e249 1-52
+mes-core/src/test/groovy/org/simplemes/mes/floor/WorkCenterDisabledStatusSpec.groovy
+  s_61a70423f190d2::t_8dfd2f9fccdcb3 1-44
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "9d19e88f595f7d7d69dcef83873d5f05efd1c497",
+  "prompts": {},
+  "sessions": {
+    "s_61a70423f190d2": {
+      "agent_id": {
+        "tool": "windsurf",
+        "id": "f814ff4a-ed1b-44b1-9460-6670de5310c2",
+        "model": "SWE-1.6 Fast"
+      },
+      "human_author": "Milind Rajavasireddy <milind.rajavasireddy@windsurf.com>"
+    }
+  }
+}
